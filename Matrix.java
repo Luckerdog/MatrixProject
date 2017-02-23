@@ -24,8 +24,7 @@ public class Matrix {
         this.matrixObject = rhs.getMatrixObject();
     }
 
-    public Matrix(Double[][] matrixObject, Integer width, Integer height, String name) {
-        this.name = name.toUpperCase();
+    public Matrix(Double[][] matrixObject, Integer width, Integer height, String name)name = name.toUpperCase();
         this.matrixObject = matrixObject;
         this.width = width;
         this.height = height;
@@ -157,28 +156,43 @@ public class Matrix {
         return coFactorMatrix;
     }
 
-    public Double[][] getInverse() {
-        Matrix temp = new Matrix(this);
-        Double inveresedDeterminant = Math.pow(this.getDeterminant(), -1.0);
-        Double[][] inverseThis = temp.getAdjoint();
-        temp.setMatrixObject(inverseThis);
-        inverseThis = temp.getTranspose();
-        for(int i = 0; i < this.getHeight(); i++) {
-            for(int j = 0; j < this.getWidth(); j++) {
-                inverseThis[i][j] = inveresedDeterminant * inverseThis[i][j];
+    public Double[][] getInverse() { //The inverse is defined as (1/det(Matrix)) * Transpose(Adjoint(Matrix))
+        Matrix temp = new Matrix(this); //Copy the matrix we're targeting (So we don't modify the original)
+        Double inveresedDeterminant = Math.pow(this.getDeterminant(), -1.0); //Find the inversed determinant of the matrix
+        Double[][] inverseThis = temp.getAdjoint(); //Get the adjoint of the copied matrix
+        temp.setMatrixObject(inverseThis); //Set the temp matrix to the adjoint
+        inverseThis = temp.getTranspose(); //Tranpose the adjoint
+        for(int i = 0; i < this.getHeight(); i++) { //For every row
+            for(int j = 0; j < this.getWidth(); j++) { //For every column
+                inverseThis[i][j] = inveresedDeterminant * inverseThis[i][j]; //Multiply each element of the T(Adj(Matrix) by Det(Matrix)^-1
             }
         }
-        return inverseThis;
+        return inverseThis; //Return the inverse
     }
-    public Double[][] getRref() {
-        Matrix temp = new Matrix(this);
-        Double[][] temp_arr = temp.getMatrixObject();
-        for(int i = 0; i < temp.getHeight(); i++){
-            Double lead =  temp_arr[i][i];
-            for(int j = 0; j < temp.getWidth(); j++){
-                temp_arr[i][j] /= lead;
+    public Double[][] getRref() { //Return the rref version of the array
+        Matrix temp = new Matrix(this); //Establish temporary matrix object
+        Double[][] temp_arr = temp.getMatrixObject(); //Grab the 2D array from temp and place it in temp_arr for easier access
+        for(int i = 0; i < temp.getHeight(); i++){ //For rows in 2D array
+            Double lead =  temp_arr[i][i]; //Leading term is on the diagonal (0,0),(1,1),(2,2)...(n,n)
+            for(int j = 0; j < temp.getWidth(); j++){ //For columns in row
+                temp_arr[i][j] /= lead; //Divide every term in the row by the leading term to bring leading term to positive 1
             }
-            Double neatLead =  temp_arr[i][i+1];
+            ArrayList<Double> leadsExcludingCurrentRow = new ArrayList<>(); //Is going to hold the numbers above and below the current variable we're making 1
+            int curretrow = i; //grab current row from iterative loop
+            for(int columnCoeffs = 0; columnCoeffs < temp.getHeight(); columnCoeffs++) {
+                if(columnCoeffs != curretrow) {
+                    leadsExcludingCurrentRow.add(temp_arr[curretrow][columnCoeffs]);
+                }
+            }
+            /* This for loop should in theory grab the things above and below our current target
+                E.G. if we have a matrix of
+                        1 2 3
+                        6 5 7
+                        9 1 4
+                and we're trying to make the 6 and 9 become zeros, this will grab 6 and 9
+                If 5 is our target, this will grab 2 and 1
+                If 4 is our target this will grab 3 and 7
+             */
             for(int k = 0; k < temp.getHeight(); k++){
 
             }
