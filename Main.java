@@ -23,7 +23,7 @@ public class Main {
         ArrayList<Matrix> dataStore = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         while(true) {
-            printMenu();
+            printMenu(); //Prints the default menu for the user
             Integer userChoice = Integer.parseInt(scan.nextLine());
             Matrix userMatrix;
             String matrixName;
