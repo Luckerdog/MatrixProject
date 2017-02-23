@@ -1,4 +1,4 @@
-package com.lopez.com.lopez.matrixProject;
+package com.lopez.com.MatrixProject;
 
 import java.util.ArrayList;
 
