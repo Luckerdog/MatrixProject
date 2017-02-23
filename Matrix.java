@@ -188,9 +188,9 @@ public class Matrix {
 
     public void swapMatrixRows(Double[][] matrix, Integer Target, Integer Home) { //Pass in a 2d array, with the row you want to swap from (TARGET) to the row you want to swap to, either way it will swap the rows
         for(int i = 0; i < matrix.length; i++) {
-            Double temp = matrix[target][i];
-            matrix[target][i] = matrix[home][i];
-            matrix[home][i] = temp;
+            Double temp = matrix[target][i]; //Class hold variable
+            matrix[target][i] = matrix[home][i]; //Import new into old
+            matrix[home][i] = temp; //Update new to old
         }
     }
 
