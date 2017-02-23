@@ -24,7 +24,8 @@ public class Matrix {
         this.matrixObject = rhs.getMatrixObject();
     }
 
-    public Matrix(Double[][] matrixObject, Integer width, Integer height, String name)name = name.toUpperCase();
+    public Matrix(Double[][] matrixObject, Integer width, Integer height, String name){
+        this.name = name.toUpperCase();
         this.matrixObject = matrixObject;
         this.width = width;
         this.height = height;
@@ -97,10 +98,10 @@ public class Matrix {
 
 
     public static void getCofactorMatrix(Double mat[][], Double temp[][], Integer forbiddenRow, Integer forbiddenColumn, Integer dimension) {
-        Integer i = 0, j = 0;
-        for(int row = 0; row < dimension; row++) {
-            for(int col = 0; col < dimension; col++) {
-                if(row != forbiddenRow && col != forbiddenColumn) {
+        Integer i = 0, j = 0; //Gets the cofactor matrix of a NxN matrix
+        for(int row = 0; row < dimension; row++) { //for row
+            for(int col = 0; col < dimension; col++) { //for column
+                if(row != forbiddenRow && col != forbiddenColumn) { //Grab elements that are not forbidden
                     temp[i][j++] = mat[row][col];
                     if(j == dimension-1) {
                         j = 0;
@@ -112,31 +113,32 @@ public class Matrix {
     }
 
     public static Double calculateDeterminant(Double [][]rhs) {
-        Double determinant = 0.0;
+        Double determinant = 0.0; //Initialize determinant
         if(rhs.length == 1) {
-            return(rhs[0][0]);
+            return(rhs[0][0]); //If Matrix is 1x1 return number in the only slot
         }
         for(int i = 0; i < rhs.length; i++) {
-            Double[][] smallerRhs = new Double[rhs.length-1][rhs.length-1];
+            Double[][] smallerRhs = new Double[rhs.length-1][rhs.length-1]; //Recursive thinning of matrix size
             for(int r = 1; r < rhs.length; r++) {
                 for(int c = 0; c < rhs.length; c++) {
-                    if(c < i) smallerRhs[r-1][c] = rhs[r][c];
+                    if(c < i) smallerRhs[r-1][c] = rhs[r][c]; //Reduces 4x4 to 3x3 to 2x2, and so on to allow for easy calculation of determinant programmtically for NxN (n^3 algo)
                     else if(c > i) smallerRhs[r-1][c-1] = rhs[r][c];
                 }
             }
             int sign = 1;
-            if(i % 2 != 0) sign *= -1;
-            determinant += sign * rhs[0][i] * (calculateDeterminant(smallerRhs));
+            if(i % 2 != 0) sign *= -1; //Delta function for determinants (-1) ^ [(Row)(Column)]
+            determinant += sign * rhs[0][i] * (calculateDeterminant(smallerRhs)); //Call recursively until 1x1 base case
         }
         return determinant;
     }
 
-    public Double[][] getTranspose() {
+    public Double[][] getTranspose() { //Change a 2D Double array to the tranpose of said array
         Double[][] orig = this.getMatrixObject();
         Double[][] temp = new Double[this.getWidth()][this.getWidth()];
         for(int i = 0; i < this.getWidth(); i++) {
             for(int j = 0; j < this.getWidth(); j++) {
-                temp[j][i] = orig[i][j];
+                temp[j][i] = orig[i][j]; //This is done by switch the row column of every elem i.e. RC (3,1) goes to (1,3) RC (2,1) goes to RC(1,2)
+                                        //RC refers to RowColumn
             }
         }
         return temp;
@@ -200,7 +202,7 @@ public class Matrix {
         return temp.getMatrixObject();
     }
 
-    public void swapMatrixRows(Double[][] matrix, Integer Target, Integer Home) { //Pass in a 2d array, with the row you want to swap from (TARGET) to the row you want to swap to, either way it will swap the rows
+    public void swapMatrixRows(Double[][] matrix, Integer target, Integer home) { //Pass in a 2d array, with the row you want to swap from (TARGET) to the row you want to swap to, either way it will swap the rows
         for(int i = 0; i < matrix.length; i++) {
             Double temp = matrix[target][i]; //Classic hold variable
             matrix[target][i] = matrix[home][i]; //Import new into old
@@ -208,7 +210,7 @@ public class Matrix {
         }
     }
 
-    public static void fillInMatrix(Double [][] rhs) {
+    public static void fillInMatrix(Double [][] rhs) { //Initialize a Matrix's matrixObject (2D Double Array) to all 0.0.
         for(int i = 0; i < rhs.length; i++) {
             for(int j = 0; j < rhs.length; j++) {
                 rhs[i][j] = 0.0;
@@ -217,13 +219,13 @@ public class Matrix {
     }
 
     public static Matrix searchDataStore(String name, ArrayList<Matrix> dataStore) { //Searches the datastore of matrix's in order to return a Matrix object
-        Matrix temp = new Matrix();
-        for(Matrix target : dataStore) {
-            if(target.getName().equals(name.toUpperCase())) {
-                temp = target;
+        Matrix temp = new Matrix(); //Create container Matrix
+        for(Matrix target : dataStore) { //Search the dataStore of Matrices
+            if(target.getName().equals(name.toUpperCase())) { //If the search name matches a name of a Matrix
+                temp = target; //Copy into container Matrix
             }
         }
-        return temp;
+        return temp; //Return contaier
     }
 
 
