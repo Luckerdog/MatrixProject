@@ -189,13 +189,13 @@ public class Matrix {
                         1 2 3
                         6 5 7
                         9 1 4
-                and we're trying to make the 6 and 9 become zeros, this will grab 6 and 9
+                If 1 is our target and we're trying to make the 6 and 9 become zeros, this will grab 6 and 9
                 If 5 is our target, this will grab 2 and 1
                 If 4 is our target this will grab 3 and 7
              */
-            for(int k = 0; k < temp.getHeight(); k++){
-
-            }
+            //TODO: Make elementary row operations and finish rest of rref algorithm
+            //TODO: Finish sanity checking for the infinite solutions case, soltuion as defined with multiple variables, i.e., solution with t,s,etc.
+            //TODO: Finish sanity check for matrix with no solution
         }
         return temp.getMatrixObject();
     }
