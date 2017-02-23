@@ -185,6 +185,15 @@ public class Matrix {
         }
         return temp.getMatrixObject();
     }
+
+    public void swapMatrixRows(Double[][] matrix, Integer Target, Integer Home) { //Pass in a 2d array, with the row you want to swap from (TARGET) to the row you want to swap to, either way it will swap the rows
+        for(int i = 0; i < matrix.length; i++) {
+            Double temp = matrix[target][i];
+            matrix[target][i] = matrix[home][i];
+            matrix[home][i] = temp;
+        }
+    }
+
     public static void fillInMatrix(Double [][] rhs) {
         for(int i = 0; i < rhs.length; i++) {
             for(int j = 0; j < rhs.length; j++) {
@@ -202,5 +211,6 @@ public class Matrix {
         }
         return temp;
     }
+
 
 }
