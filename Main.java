@@ -1,4 +1,4 @@
-package com.lopez.com.MatrixProject;
+//package com.lopez.com.MatrixProject;
 
 import java.util.ArrayList;
 import java.util.Scanner;

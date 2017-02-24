@@ -1,4 +1,4 @@
-package com.lopez.com.MatrixProject;
+//package com.lopez.com.MatrixProject;
 
 import java.util.ArrayList;
 
@@ -180,10 +180,10 @@ public class Matrix {
                 temp_arr[i][j] /= lead; //Divide every term in the row by the leading term to bring leading term to positive 1
             }
             ArrayList<Double> leadsExcludingCurrentRow = new ArrayList<>(); //Is going to hold the numbers above and below the current variable we're making 1
-            int curretrow = i; //grab current row from iterative loop
+            int currentrow = i; //grab current row from iterative loop
             for(int columnCoeffs = 0; columnCoeffs < temp.getHeight(); columnCoeffs++) {
-                if(columnCoeffs != curretrow) {
-                    leadsExcludingCurrentRow.add(temp_arr[curretrow][columnCoeffs]);
+                if(columnCoeffs != currentrow) {
+                    leadsExcludingCurrentRow.add(temp_arr[currentrow][columnCoeffs]);
                 }
             }
             /* This for loop should in theory grab the things above and below our current target
@@ -195,6 +195,7 @@ public class Matrix {
                 If 5 is our target, this will grab 2 and 1
                 If 4 is our target this will grab 3 and 7
              */
+            
             //TODO: Make elementary row operations and finish rest of rref algorithm
             //TODO: Finish sanity checking for the infinite solutions case, soltuion as defined with multiple variables, i.e., solution with t,s,etc.
             //TODO: Finish sanity check for matrix with no solution
