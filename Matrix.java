@@ -195,7 +195,7 @@ public class Matrix {
                 If 5 is our target, this will grab 2 and 1
                 If 4 is our target this will grab 3 and 7
              */
-            
+
             //TODO: Make elementary row operations and finish rest of rref algorithm
             //TODO: Finish sanity checking for the infinite solutions case, soltuion as defined with multiple variables, i.e., solution with t,s,etc.
             //TODO: Finish sanity check for matrix with no solution
