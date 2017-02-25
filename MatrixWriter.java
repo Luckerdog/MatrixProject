@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class MatrixWriter {
     public static void writeDataStoreToFile(ArrayList<Matrix> dataStore) throws IOException {
-        PrintWriter toWrite = new PrintWriter("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt");
+        PrintWriter toWrite = new PrintWriter("");
         String message;
         for(Matrix i : dataStore) {
             message = new String();
@@ -28,7 +28,7 @@ public class MatrixWriter {
 
     public static void loadDataStore(ArrayList<Matrix> dataStore) throws IOException {
         Matrix temp;
-        File inFile = new File("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt");
+        File inFile = new File("");
         Scanner readMatrix = new Scanner(inFile);
         while(readMatrix.hasNext()) {
             String matrixName = readMatrix.next();
