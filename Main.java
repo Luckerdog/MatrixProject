@@ -1,5 +1,6 @@
 //package com.lopez.com.MatrixProject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,12 +11,13 @@ public class Main {
 
     public static void printMenu() {
         System.out.print("Please select an option with the corresponding numbers, if you fail to do so, the program will quit.\n");
-        System.out.print("Add a matrix (1)\n");
-        System.out.print("Print a matrix (2)\n");
-        System.out.print("Find the determinant of a matrix (3)\n");
-        System.out.print("Find the transpose of a matrix (4)\n");
-        System.out.print("Find the inverse of a matrix (5)\n");
-        System.out.print("Find the rref of a matrix (6)\n");
+        System.out.print("Load matrices from memory (1)\n");
+        System.out.print("Add a matrix (2)\n");
+        System.out.print("Print a matrix (3)\n");
+        System.out.print("Find the determinant of a matrix (4)\n");
+        System.out.print("Find the transpose of a matrix (5)\n");
+        System.out.print("Find the inverse of a matrix (6)\n");
+        System.out.print("Find the rref of a matrix (7)\n");
         System.out.print("Enter your choice here: ");
     }
 
@@ -30,6 +32,15 @@ public class Main {
             Matrix temp;
             switch (userChoice) {
                 case 1:
+                    try {
+                        MatrixWriter.loadDataStore(dataStore);
+                    }
+                    catch(IOException e) {
+                        System.out.print("File does not exist or is corrupted, exiting with Status 1");
+                        System.exit(1);
+                    }
+                    break;
+                case 2:
                     System.out.print("Enter your matrix dimensions Row by Column\n (If Not Square, the rest will be filled with Zeroes)\n Enter RxC here: ");
                     Integer height = Integer.parseInt(scan.next());
                     Integer width = Integer.parseInt(scan.next());
@@ -70,14 +81,14 @@ public class Main {
                         dataStore.add(userMatrix);
                     }
                     break;
-                case 2: //Prints the matrix if found in the matrix data store
+                case 3: //Prints the matrix if found in the matrix data store
                     System.out.print("Enter which matrix you'd like to print: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
                     if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
                     else Matrix.printDoubleTwoDArray(temp.getMatrixObject());
                     break;
-                case 3: //Find the determinant of the matrix if the matrix is in the datastore
+                case 4: //Find the determinant of the matrix if the matrix is in the datastore
                     System.out.print("Enter which matrix you'd like to find the determinant of: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
@@ -85,21 +96,21 @@ public class Main {
                     //Determinant is calculated when matrix is formed
                     else System.out.println(temp.getDeterminant());
                     break;
-                case 4: //Find the transpose of the matrix if the matrix is in the datastore
+                case 5: //Find the transpose of the matrix if the matrix is in the datastore
                     System.out.print("Enter which matrix you'd like to transpose: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
                     if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
                     else Matrix.printDoubleTwoDArray(temp.getTranspose());
                     break;
-                case 5: //Find the inverse of the matrix if the matrix is in the datastore
+                case 6: //Find the inverse of the matrix if the matrix is in the datastore
                     System.out.print("Enter which matrix you'd like to get the inverse of: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
                     if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
                     else Matrix.printDoubleTwoDArray(temp.getInverse());
                     break;
-                case 6:
+                case 7:
                     System.out.print("Enter which matrix you'd like to put into reduced row echelon form: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
@@ -107,7 +118,13 @@ public class Main {
                     //else Matrix.printDoubleTwoDArray(temp.getRref());
                     break;
                 default:
-                    System.exit(1);
+                    try {
+                        MatrixWriter.writeDataStoreToFile(dataStore);
+                    } catch (IOException e) {
+                        System.out.print("File either corrupted or not found, cannot write.");
+                        System.exit(1);
+                    }
+                    System.exit(0);
             }
         }
     }
