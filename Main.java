@@ -21,7 +21,7 @@ public class Main {
         System.out.print("Enter your choice here: ");
     }
 
-    public static void main (String args[]) throws IOException {
+    public static void main (String args[]) {
         ArrayList<Matrix> dataStore = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         while(true) {
@@ -118,7 +118,12 @@ public class Main {
                     //else Matrix.printDoubleTwoDArray(temp.getRref());
                     break;
                 default:
-                    MatrixWriter.writeDataStoreToFile(dataStore);
+                    try {
+                        MatrixWriter.writeDataStoreToFile(dataStore);
+                    } catch (IOException e) {
+                        System.out.print("File either corrupted or not found, cannot write.");
+                        System.exit(1);
+                    }
                     System.exit(0);
             }
         }
