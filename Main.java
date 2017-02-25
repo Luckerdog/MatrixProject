@@ -39,6 +39,7 @@ public class Main {
                         System.out.print("File does not exist or is corrupted, exiting with Status 1");
                         System.exit(1);
                     }
+                    break;
                 case 2:
                     System.out.print("Enter your matrix dimensions Row by Column\n (If Not Square, the rest will be filled with Zeroes)\n Enter RxC here: ");
                     Integer height = Integer.parseInt(scan.next());
