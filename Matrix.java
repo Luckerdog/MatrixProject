@@ -1,4 +1,4 @@
-package com.lopez.com.MatrixProject;
+//package com.lopez.com.MatrixProject;
 
 import java.util.ArrayList;
 
@@ -186,6 +186,14 @@ public class Matrix {
                     leadsExcludingCurrentRow.add(temp_arr[currentrow][columnCoeffs]);
                 }
             }
+            int position = 0; //Need to access LECR sequentially
+            for(int j = 0; j < temp.getHeight(); j++){//Modify all rows
+                if(j != i){//Except the row we are on
+                    //Take the value in LECR and do EROPS using the value as the modifier
+                    elementaryOps(temp_arr,i,leadsExcludingCurrentRow.get(position),j);
+                }
+                position ++;
+            }
             /* This for loop should in theory grab the things above and below our current target
                 E.G. if we have a matrix of
                         1 2 3
@@ -210,7 +218,12 @@ public class Matrix {
             matrix[home][i] = temp; //Update new to old
         }
     }
-
+    public void elementaryOps(Double[][] matrix, Integer modifiedRow, Double modifier, Integer transformedRow){
+        for(int i = 0; i < matrix.length; i++){
+            Double executioner = modifier * matrix[modifiedRow][i];//Take the modifiedRow value multiplied by the modifier
+            matrix[transformedRow][i] += executioner;//Combine with the value in the transformedRow
+        }
+    }
     public static void fillInMatrix(Double [][] rhs) { //Initialize a Matrix's matrixObject (2D Double Array) to all 0.0.
         for(int i = 0; i < rhs.length; i++) {
             for(int j = 0; j < rhs.length; j++) {
