@@ -1,6 +1,7 @@
 package com.lopez.com.MatrixProject;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -11,9 +12,19 @@ import java.util.Scanner;
  */
 public class MatrixWriter {
     public static void writeDataStoreToFile(ArrayList<Matrix> dataStore) throws IOException {
-        PrintWriter toWrite = new PrintWriter("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt");
+        FileWriter out = new FileWriter("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt",true);
+        PrintWriter toWrite = new PrintWriter(out);
+        File inFile = new File("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt");
+        Scanner scan = new Scanner(inFile);
+        ArrayList<String> usedNames = new ArrayList<>();
+        while(scan.hasNext()) {
+            String name = scan.next();
+            usedNames.add(name);
+            scan.nextLine();
+        }
         String message;
         for(Matrix i : dataStore) {
+            if(usedNames.contains(i.getName())) continue;
             message = new String();
             message += i.getName() + " " + i.getHeight() + " " + i.getWidth();
             for(Double[] j : i.getMatrixObject()) {
