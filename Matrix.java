@@ -196,8 +196,8 @@ public class Matrix {
                 }
             }
             int position = 0; //Need to access LECR sequentially
-            for(int j = 0; j < temp.getHeight(); j++){//Modify all rows
-                if(j != i){//Except the row we are on
+            for(int j = 0; j < temp.getHeight(); j++) {//Modify all rows
+                if(j != i) {//Except the row we are on
                     //Take the value in LECR and do EROPS using the value as the modifier
                     printDoubleTwoDArray(temp_arr);
                     if(leadsExcludingCurrentRow.get(position) == 0) continue;
@@ -214,7 +214,6 @@ public class Matrix {
                 If 5 is our target, this will grab 2 and 1
                 If 4 is our target this will grab 3 and 7
              */
-
             //TODO: Make elementary row operations and finish rest of rref algorithm
             //TODO: Finish sanity checking for the infinite solutions case, soltuion as defined with multiple variables, i.e., solution with t,s,etc.
             //TODO: Finish sanity check for matrix with no solution
