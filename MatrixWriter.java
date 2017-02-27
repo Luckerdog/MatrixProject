@@ -39,7 +39,7 @@ public class MatrixWriter {
 
     public static void loadDataStore(ArrayList<Matrix> dataStore) throws IOException {
         Matrix temp;
-        File inFile = new File("");
+        File inFile = new File("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt");
         Scanner readMatrix = new Scanner(inFile);
         while(readMatrix.hasNext()) {
             String matrixName = readMatrix.next();
