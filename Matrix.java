@@ -182,7 +182,13 @@ public class Matrix {
                 for(int x = i; x < temp.getHeight(); x++) {
                     if(temp_arr[x][i].compareTo(0.0) != 0) {
                         swapMatrixRows(temp_arr,x,i);
+                        plato = true;
+                        if(plato) break;
                     }
+                }
+                if(!plato) { //We didn't find a row to swap for
+                    System.out.print("This system does not appear to be linearly dependent.\n");
+                    break;
                 }
             }
             for(int j = 0; j < temp.getWidth(); j++){ //For columns in row
@@ -199,7 +205,6 @@ public class Matrix {
             for(int j = 0; j < temp.getHeight(); j++) {//Modify all rows
                 if(j != i) {//Except the row we are on
                     //Take the value in LECR and do EROPS using the value as the modifier
-                    printDoubleTwoDArray(temp_arr);
                     if(leadsExcludingCurrentRow.get(position) == 0) continue;
                     elementaryOps(temp_arr,temp_arr_width,i,leadsExcludingCurrentRow.get(position),j);
                     position++;
@@ -231,7 +236,6 @@ public class Matrix {
     public void elementaryOps(Double[][] matrix, Integer temp_arr_width, Integer modifiedRow, Double modifier, Integer transformedRow){
         for(int i = 0; i < temp_arr_width; i++){
             Double executioner = (modifier * matrix[modifiedRow][i] * -1); //Take the modifiedRow value multiplied by the modifier
-            System.out.print(executioner + "\n");
             matrix[transformedRow][i] += executioner;//Combine with the value in the transformedRow
         }
     }
