@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void printMenu() {
+    public static void printMenu() { //Prints the main menu
         System.out.print("Please select an option with the corresponding numbers, if you fail to do so, the program will quit.\n");
         System.out.print("Print all matrices (1)\n");
         System.out.print("Add a matrix (2)\n");
@@ -21,7 +21,7 @@ public class Main {
         ArrayList<Matrix> dataStore = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         try {
-            MatrixWriter.loadDataStore(dataStore);
+            MatrixWriter.loadDataStore(dataStore); //Loads saved matrices to dataStore
         }
         catch(IOException e) {
             System.out.print("File does not exist or is corrupted, exiting with Status 1");
@@ -110,7 +110,7 @@ public class Main {
                     if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
                     else Matrix.printDoubleTwoDArray(temp.getInverse());
                     break;
-                case 8:
+                case 8: //Rref of a matrix
                     System.out.print("Enter which matrix you'd like to put into reduced row echelon form: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
@@ -119,7 +119,7 @@ public class Main {
                     break;
                 default:
                     try {
-                        MatrixWriter.writeDataStoreToFile(dataStore);
+                        MatrixWriter.writeDataStoreToFile(dataStore); //Writes saved matrices to a file in order for persistence
                     } catch (IOException e) {
                         System.out.print("File either corrupted or not found, cannot write.");
                         e.printStackTrace();
