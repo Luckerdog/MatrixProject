@@ -25,6 +25,7 @@ public class Main {
         }
         catch(IOException e) {
             System.out.print("File does not exist or is corrupted, exiting with Status 1");
+            e.printStackTrace();
             System.exit(1);
         }
         while(true) {
@@ -121,6 +122,7 @@ public class Main {
                         MatrixWriter.writeDataStoreToFile(dataStore);
                     } catch (IOException e) {
                         System.out.print("File either corrupted or not found, cannot write.");
+                        e.printStackTrace();
                         System.exit(1);
                     }
                     System.exit(0);

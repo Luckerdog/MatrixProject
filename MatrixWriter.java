@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 public class MatrixWriter {
     public static void writeDataStoreToFile(ArrayList<Matrix> dataStore) throws IOException {
-        FileWriter out = new FileWriter("",true);
+        FileWriter out = new FileWriter("C:\\Users\\Taylor Lopez\\Documents\\GitHub\\MatrixProject\\matrixStore.txt",true);
         PrintWriter toWrite = new PrintWriter(out);
-        File inFile = new File("");
+        File inFile = new File("C:\\Users\\Taylor Lopez\\Documents\\GitHub\\MatrixProject\\matrixStore.txt");
         Scanner scan = new Scanner(inFile);
         ArrayList<String> usedNames = new ArrayList<>();
         while(scan.hasNext()) {
@@ -34,7 +34,7 @@ public class MatrixWriter {
 
     public static void loadDataStore(ArrayList<Matrix> dataStore) throws IOException {
         Matrix temp;
-        File inFile = new File("");
+        File inFile = new File("C:\\Users\\Taylor Lopez\\Documents\\GitHub\\MatrixProject\\matrixStore.txt");
         Scanner readMatrix = new Scanner(inFile);
         while(readMatrix.hasNext()) {
             String matrixName = readMatrix.next();
