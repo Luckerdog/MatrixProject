@@ -133,6 +133,16 @@ public class Matrix {
         return determinant;
     }
 
+    public Double[][] getScalarMultiple(Integer scalarMultiple) {
+        Double [][] temp = this.getMatrixObject();
+        for(Double[] i : temp) {
+            for(Double j : i) {
+                j *= scalarMultiple;
+            }
+        }
+        return temp;
+    }
+
     public Double[][] getTranspose() { //Change a 2D Double array to the tranpose of said array
         Double[][] orig = this.getMatrixObject();
         Double[][] temp = new Double[this.getWidth()][this.getWidth()];
@@ -164,7 +174,7 @@ public class Matrix {
         Double inveresedDeterminant = Math.pow(this.getDeterminant(), -1.0); //Find the inversed determinant of the matrix
         Double[][] inverseThis = temp.getAdjoint(); //Get the adjoint of the copied matrix
         temp.setMatrixObject(inverseThis); //Set the temp matrix to the adjoint
-        inverseThis = temp.getTranspose(); //Tranpose the adjoint
+        inverseThis = temp.getTranspose(); //Transpose the adjoint
         for(int i = 0; i < this.getHeight(); i++) { //For every row
             for(int j = 0; j < this.getWidth(); j++) { //For every column
                 inverseThis[i][j] = inveresedDeterminant * inverseThis[i][j]; //Multiply each element of the T(Adj(Matrix) by Det(Matrix)^-1
@@ -258,7 +268,7 @@ public class Matrix {
                 temp = target; //Copy into container Matrix
             }
         }
-        return temp; //Return contaier
+        return temp; //Return container
     }
 
     public static boolean searchForNameConflict(String name, ArrayList<Matrix> dataStore) { //Searches for name conflict of matrices
