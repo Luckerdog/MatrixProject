@@ -1,5 +1,3 @@
-//package com.lopez.com.MatrixProject;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,14 +5,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Created by luckerdog on 2/24/17.
- */
 public class MatrixWriter {
     public static void writeDataStoreToFile(ArrayList<Matrix> dataStore) throws IOException {
-        FileWriter out = new FileWriter("C:\\Users\\Jason\\Documents\\GitHub\\MatrixProject-2\\matrixStore.txt",true);
+        FileWriter out = new FileWriter("",true);
         PrintWriter toWrite = new PrintWriter(out);
-        File inFile = new File("C:\\Users\\Jason\\Documents\\GitHub\\MatrixProject-2\\matrixStore.txt");
+        File inFile = new File("");
         Scanner scan = new Scanner(inFile);
         ArrayList<String> usedNames = new ArrayList<>();
         while(scan.hasNext()) {
@@ -39,7 +34,7 @@ public class MatrixWriter {
 
     public static void loadDataStore(ArrayList<Matrix> dataStore) throws IOException {
         Matrix temp;
-        File inFile = new File("C:\\Users\\Jason\\Documents\\GitHub\\MatrixProject-2\\matrixStore.txt");
+        File inFile = new File("");
         Scanner readMatrix = new Scanner(inFile);
         while(readMatrix.hasNext()) {
             String matrixName = readMatrix.next();
