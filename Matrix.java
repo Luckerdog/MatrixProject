@@ -1,4 +1,4 @@
-package com.lopez.com.MatrixProject;
+//package com.lopez.com.MatrixProject;
 
 import java.util.ArrayList;
 
@@ -176,12 +176,11 @@ public class Matrix {
         Double[][] temp_arr = temp.getMatrixObject(); //Grab the 2D array from temp and place it in temp_arr for easier access
         Integer temp_arr_width = temp.getWidth();
         for(int i = 0; i < temp.getHeight(); i++){ //For rows in 2D array
-            Double lead = temp_arr[i][i]; //Leading term is on the diagonal (0,0),(1,1),(2,2)...(n,n)
-            if(lead.equals(0.0)) {
+            if(temp_arr[i][i].equals(0.0)) {
                 boolean plato = false;
                 for(int x = i; x < temp.getHeight(); x++) {
                     if(temp_arr[x][i].compareTo(0.0) != 0) {
-                        swapMatrixRows(temp_arr,x,i);
+                        swapMatrixRows(temp_arr,x,i,temp_arr_width);
                         plato = true;
                         if(plato) break;
                     }
@@ -191,6 +190,7 @@ public class Matrix {
                     break;
                 }
             }
+            Double lead = temp_arr[i][i];// Leading term is on the diagonal (0,0),(1,1),(2,2)...(n,n)
             for(int j = 0; j < temp.getWidth(); j++){ //For columns in row
                 temp_arr[i][j] /= lead; //Divide every term in the row by the leading term to bring leading term to positive 1
             }
@@ -226,15 +226,18 @@ public class Matrix {
         return temp.getMatrixObject();
     }
 
-    public void swapMatrixRows(Double[][] matrix, Integer target, Integer home) { //Pass in a 2d array, with the row you want to swap from (TARGET) to the row you want to swap to, either way it will swap the rows
-        for(int i = 0; i < matrix.length; i++) {
+    public void swapMatrixRows(Double[][] matrix, Integer target, Integer home, Integer arr_width) { //Pass in a 2d array, with the row you want to swap from (TARGET) to the row you want to swap to, either way it will swap the rows
+        for(int i = 0; i < arr_width; i++) {
             Double temp = matrix[target][i]; //Classic hold variable
+            System.out.print("Temp for Row: " + target + " Col: " + i + " Value: " + temp);
             matrix[target][i] = matrix[home][i]; //Import new into old
             matrix[home][i] = temp; //Update new to old
+            printDoubleTwoDArray(matrix);
         }
     }
     public void elementaryOps(Double[][] matrix, Integer temp_arr_width, Integer modifiedRow, Double modifier, Integer transformedRow){
         for(int i = 0; i < temp_arr_width; i++){
+            printDoubleTwoDArray(matrix);
             Double executioner = (modifier * matrix[modifiedRow][i] * -1); //Take the modifiedRow value multiplied by the modifier
             matrix[transformedRow][i] += executioner;//Combine with the value in the transformedRow
         }

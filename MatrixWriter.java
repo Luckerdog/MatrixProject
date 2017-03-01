@@ -1,4 +1,4 @@
-package com.lopez.com.MatrixProject;
+//package com.lopez.com.MatrixProject;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,9 +12,9 @@ import java.util.Scanner;
  */
 public class MatrixWriter {
     public static void writeDataStoreToFile(ArrayList<Matrix> dataStore) throws IOException {
-        FileWriter out = new FileWriter("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt",true);
+        FileWriter out = new FileWriter("C:\\Users\\Jason\\Documents\\GitHub\\MatrixProject-2\\matrixStore.txt",true);
         PrintWriter toWrite = new PrintWriter(out);
-        File inFile = new File("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt");
+        File inFile = new File("C:\\Users\\Jason\\Documents\\GitHub\\MatrixProject-2\\matrixStore.txt");
         Scanner scan = new Scanner(inFile);
         ArrayList<String> usedNames = new ArrayList<>();
         while(scan.hasNext()) {
@@ -39,7 +39,7 @@ public class MatrixWriter {
 
     public static void loadDataStore(ArrayList<Matrix> dataStore) throws IOException {
         Matrix temp;
-        File inFile = new File("C:\\Users\\Taylor Lopez\\Google Drive\\CIT-63\\Lopez_Taylor_CIT63\\src\\com\\lopez\\com\\MatrixProject\\matrixStore.txt");
+        File inFile = new File("C:\\Users\\Jason\\Documents\\GitHub\\MatrixProject-2\\matrixStore.txt");
         Scanner readMatrix = new Scanner(inFile);
         while(readMatrix.hasNext()) {
             String matrixName = readMatrix.next();
