@@ -1,4 +1,4 @@
-//package com.lopez.com.MatrixProject;
+package com.lopez.com.MatrixProject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Main {
 
     public static void printMenu() {
         System.out.print("Please select an option with the corresponding numbers, if you fail to do so, the program will quit.\n");
-        System.out.print("Load matrices from memory (1)\n");
+        System.out.print("Print all matrices (1)\n");
         System.out.print("Add a matrix (2)\n");
         System.out.print("Print a matrix (3)\n");
         System.out.print("Find the determinant of a matrix (4)\n");
@@ -24,6 +24,13 @@ public class Main {
     public static void main (String args[]) {
         ArrayList<Matrix> dataStore = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
+        try {
+            MatrixWriter.loadDataStore(dataStore);
+        }
+        catch(IOException e) {
+            System.out.print("File does not exist or is corrupted, exiting with Status 1");
+            System.exit(1);
+        }
         while(true) {
             printMenu(); //Prints the default menu for the user
             Integer userChoice = Integer.parseInt(scan.nextLine());
@@ -32,12 +39,10 @@ public class Main {
             Matrix temp;
             switch (userChoice) {
                 case 1:
-                    try {
-                        MatrixWriter.loadDataStore(dataStore);
-                    }
-                    catch(IOException e) {
-                        System.out.print("File does not exist or is corrupted, exiting with Status 1");
-                        System.exit(1);
+                    for(Matrix i : dataStore) {
+                        System.out.print(i.getName() + "\n");
+                        Matrix.printDoubleTwoDArray(i.getMatrixObject());
+                        System.out.print("\n");
                     }
                     break;
                 case 2:
@@ -47,39 +52,26 @@ public class Main {
                     scan.nextLine();
                     //Deciding which dimension is bigger and making that dimension determine the square
                     Double [][] newMatrix;
-                    if(height > width) newMatrix = new Double[height][height];
-                    else newMatrix = new Double[width][width];
+                    newMatrix = new Double[height][width];
                     //Deciding which dimension is bigger and making that dimension determine the square
                     Matrix.fillInMatrix(newMatrix); //fill in the square matrix with zeroes
-                    if(height.equals(width)) { //fill in the entire matrix
-                        for (int i = 0; i < height; i++) {
-                            for (int j = 0; j < width; j++) {
-                                //Fill in the matrix
-                                System.out.print("Enter the Double for Slot. Row: " + (i+1) + " Column: " + (j+1) + " : ");
-                                newMatrix[i][j] = scan.nextDouble();
-                                System.out.print("\n");
-                            }
+                    for (int i = 0; i < height; i++) {
+                        for (int j = 0; j < width; j++) {
+                            //Fill in the matrix
+                            System.out.print("Enter the Double for Slot. Row: " + (i+1) + " Column: " + (j+1) + " : ");
+                            newMatrix[i][j] = scan.nextDouble();
+                            System.out.print("\n");
                         }
-                        scan.nextLine();
-                        System.out.print("Please enter a name for your matrix: ");
-                        String name = scan.nextLine();
-                        userMatrix = new Matrix(newMatrix,width,height,name);
-                        dataStore.add(userMatrix);
-                    } else { //fill in the dimension the user requested
-                        for(int i = 0; i < height; i++) {
-                            for(int j = 0; j < width; j++) {
-                                //Fill in the matrix for your specified non-square size
-                                System.out.print("Enter the Double for Slot. Row: " + (i+1) + " Column: " + (j+1) + " : ");
-                                newMatrix[i][j] = scan.nextDouble();
-                                System.out.print("\n");
-                            }
-                        }
-                        scan.nextLine();
-                        System.out.print("Please enter a name for your matrix: ");
-                        String name = scan.nextLine();
-                        userMatrix = new Matrix(newMatrix,width,height,name);
-                        dataStore.add(userMatrix);
                     }
+                    scan.nextLine();
+                    System.out.print("Please enter a name for your matrix: ");
+                    String name = scan.nextLine();
+                    while(Matrix.searchForNameConflict(name,dataStore)) {
+                        System.out.print("Name conflicts, please try again: ");
+                        name = scan.nextLine();
+                    }
+                    userMatrix = new Matrix(newMatrix,width,height,name);
+                    dataStore.add(userMatrix);
                     break;
                 case 3: //Prints the matrix if found in the matrix data store
                     System.out.print("Enter which matrix you'd like to print: ");
@@ -115,7 +107,7 @@ public class Main {
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
                     if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
-                    //else Matrix.printDoubleTwoDArray(temp.getRref());
+                    else Matrix.printDoubleTwoDArray(temp.getRref());
                     break;
                 default:
                     try {

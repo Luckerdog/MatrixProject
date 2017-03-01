@@ -1,4 +1,4 @@
-//package com.lopez.com.MatrixProject;
+package com.lopez.com.MatrixProject;
 
 import java.util.ArrayList;
 
@@ -174,8 +174,17 @@ public class Matrix {
     public Double[][] getRref() { //Return the rref version of the array
         Matrix temp = new Matrix(this); //Establish temporary matrix object
         Double[][] temp_arr = temp.getMatrixObject(); //Grab the 2D array from temp and place it in temp_arr for easier access
+        Integer temp_arr_width = temp.getWidth();
         for(int i = 0; i < temp.getHeight(); i++){ //For rows in 2D array
-            Double lead =  temp_arr[i][i]; //Leading term is on the diagonal (0,0),(1,1),(2,2)...(n,n)
+            Double lead = temp_arr[i][i]; //Leading term is on the diagonal (0,0),(1,1),(2,2)...(n,n)
+            if(lead.equals(0.0)) {
+                boolean plato = false;
+                for(int x = i; x < temp.getHeight(); x++) {
+                    if(temp_arr[x][i].compareTo(0.0) != 0) {
+                        swapMatrixRows(temp_arr,x,i);
+                    }
+                }
+            }
             for(int j = 0; j < temp.getWidth(); j++){ //For columns in row
                 temp_arr[i][j] /= lead; //Divide every term in the row by the leading term to bring leading term to positive 1
             }
@@ -183,16 +192,18 @@ public class Matrix {
             int currentrow = i; //grab current row from iterative loop
             for(int columnCoeffs = 0; columnCoeffs < temp.getHeight(); columnCoeffs++) {
                 if(columnCoeffs != currentrow) {
-                    leadsExcludingCurrentRow.add(temp_arr[currentrow][columnCoeffs]);
+                    leadsExcludingCurrentRow.add(temp_arr[columnCoeffs][currentrow]);
                 }
             }
             int position = 0; //Need to access LECR sequentially
             for(int j = 0; j < temp.getHeight(); j++){//Modify all rows
                 if(j != i){//Except the row we are on
                     //Take the value in LECR and do EROPS using the value as the modifier
-                    elementaryOps(temp_arr,i,leadsExcludingCurrentRow.get(position),j);
+                    printDoubleTwoDArray(temp_arr);
+                    if(leadsExcludingCurrentRow.get(position) == 0) continue;
+                    elementaryOps(temp_arr,temp_arr_width,i,leadsExcludingCurrentRow.get(position),j);
+                    position++;
                 }
-                position ++;
             }
             /* This for loop should in theory grab the things above and below our current target
                 E.G. if we have a matrix of
@@ -218,9 +229,10 @@ public class Matrix {
             matrix[home][i] = temp; //Update new to old
         }
     }
-    public void elementaryOps(Double[][] matrix, Integer modifiedRow, Double modifier, Integer transformedRow){
-        for(int i = 0; i < matrix.length; i++){
-            Double executioner = modifier * matrix[modifiedRow][i];//Take the modifiedRow value multiplied by the modifier
+    public void elementaryOps(Double[][] matrix, Integer temp_arr_width, Integer modifiedRow, Double modifier, Integer transformedRow){
+        for(int i = 0; i < temp_arr_width; i++){
+            Double executioner = (modifier * matrix[modifiedRow][i] * -1); //Take the modifiedRow value multiplied by the modifier
+            System.out.print(executioner + "\n");
             matrix[transformedRow][i] += executioner;//Combine with the value in the transformedRow
         }
     }
@@ -242,5 +254,13 @@ public class Matrix {
         return temp; //Return contaier
     }
 
+    public static boolean searchForNameConflict(String name, ArrayList<Matrix> dataStore) { //Searches for name conflict of matrices
+       for(Matrix i : dataStore) {
+           if(i.getName().equals(name.toUpperCase())) {
+               return true;
+           }
+       }
+       return false;
+    }
 
 }
