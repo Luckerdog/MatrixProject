@@ -1,12 +1,7 @@
-//package com.lopez.com.MatrixProject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Created by Taylor Lopez on 2/20/2017.
- */
 public class Main {
 
     public static void printMenu() {
