@@ -9,7 +9,7 @@ public class Main {
         System.out.print("Print all matrices (1)\n");
         System.out.print("Add a matrix (2)\n");
         System.out.print("Print a matrix (3)\n");
-        System.out.print("Get the scalar multiple of a matrix(4)");
+        System.out.print("Get the scalar multiple of a matrix (4)\n");
         System.out.print("Find the determinant of a matrix (5)\n");
         System.out.print("Find the transpose of a matrix (6)\n");
         System.out.print("Find the inverse of a matrix (7)\n");
@@ -24,7 +24,7 @@ public class Main {
             MatrixWriter.loadDataStore(dataStore); //Loads saved matrices to dataStore
         }
         catch(IOException e) {
-            System.out.print("File does not exist or is corrupted, exiting with Status 1");
+            System.out.print("File does not exist or is corrupted, exiting with Status 1.\n");
             e.printStackTrace();
             System.exit(1);
         }
@@ -84,8 +84,10 @@ public class Main {
                     if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
                     else {
                         System.out.print("Enter the scalar multiple: ");
-                        Integer scalar = scan.nextInt();
-                        Matrix.printDoubleTwoDArray(temp.getScalarMultiple(scalar));
+                        Integer scalar = Integer.parseInt(scan.nextLine());
+                        Double [][] toPrint = new Double[temp.getHeight()][temp.getWidth()];
+                        temp.getScalarMultiple(scalar, toPrint);
+                        Matrix.printDoubleTwoDArray(toPrint);
                     }
                     break;
                 case 5: //Find the determinant of the matrix if the matrix is in the datastore
@@ -121,7 +123,7 @@ public class Main {
                     try {
                         MatrixWriter.writeDataStoreToFile(dataStore); //Writes saved matrices to a file in order for persistence
                     } catch (IOException e) {
-                        System.out.print("File either corrupted or not found, cannot write.");
+                        System.out.print("File either corrupted or not found, cannot write.\n");
                         e.printStackTrace();
                         System.exit(1);
                     }

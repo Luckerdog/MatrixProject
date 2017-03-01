@@ -25,7 +25,7 @@ public class Matrix {
         this.matrixObject = matrixObject;
         this.width = width;
         this.height = height;
-        if(width == height && width == 1) this.determinant = this.matrixObject[0][0];
+        if(width.equals(height) && width.equals(1)) this.determinant = this.matrixObject[0][0];
         else this.determinant = calculateDeterminant(this.matrixObject);
     }
 
@@ -128,14 +128,12 @@ public class Matrix {
         return determinant;
     }
 
-    public Double[][] getScalarMultiple(Integer scalarMultiple) {
-        Double [][] temp = this.getMatrixObject();
-        for(Double[] i : temp) {
-            for(Double j : i) {
-                j *= scalarMultiple;
+    public void getScalarMultiple(Integer scalarMultiple, Double[][] toPrint) {
+        for(int i = 0; i < this.getHeight(); i++) {
+            for(int j = 0; j < this.getWidth(); j++) {
+                toPrint[i][j] = this.getMatrixObject()[i][j] * scalarMultiple;
             }
         }
-        return temp;
     }
 
     public Double[][] getTranspose() { //Change a 2D Double array to the tranpose of said array
