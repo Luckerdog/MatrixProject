@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by be127 on 2/14/17.
  */
 public class Matrix {
+    //Class to hold our Matrix
     private Double[][] matrixObject;
     private String name;
     private Integer width;
