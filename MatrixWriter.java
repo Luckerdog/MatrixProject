@@ -5,11 +5,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class MatrixWriter {
+    public static String MatrixPathName = ""; //Define your text file path to store matrices
+
     public static void writeDataStoreToFile(ArrayList<Matrix> dataStore) throws IOException {
-        FileWriter out = new FileWriter("C:\\Users\\Taylor Lopez\\Documents\\GitHub\\MatrixProject\\matrixStore.txt",true);
+        FileWriter out = new FileWriter(MatrixPathName,true);
         PrintWriter toWrite = new PrintWriter(out);
-        File inFile = new File("C:\\Users\\Taylor Lopez\\Documents\\GitHub\\MatrixProject\\matrixStore.txt");
+        File inFile = new File(MatrixPathName);
         Scanner scan = new Scanner(inFile);
         ArrayList<String> usedNames = new ArrayList<>();
         while(scan.hasNext()) {
@@ -34,7 +37,7 @@ public class MatrixWriter {
 
     public static void loadDataStore(ArrayList<Matrix> dataStore) throws IOException {
         Matrix temp;
-        File inFile = new File("C:\\Users\\Taylor Lopez\\Documents\\GitHub\\MatrixProject\\matrixStore.txt");
+        File inFile = new File(MatrixPathName);
         Scanner readMatrix = new Scanner(inFile);
         while(readMatrix.hasNext()) {
             String matrixName = readMatrix.next();
