@@ -1,5 +1,3 @@
-//package com.lopez.com.MatrixProject;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
