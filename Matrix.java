@@ -182,7 +182,13 @@ public class Matrix {
                 for(int x = i; x < temp.getHeight(); x++) {
                     if(temp_arr[x][i].compareTo(0.0) != 0) {
                         swapMatrixRows(temp_arr,x,i);
+                        plato = true;
+                        if(plato) break;
                     }
+                }
+                if(!plato) { //We didn't find a row to swap for
+                    System.out.print("This system does not appear to be linearly dependent.\n");
+                    break;
                 }
             }
             for(int j = 0; j < temp.getWidth(); j++){ //For columns in row
@@ -196,10 +202,9 @@ public class Matrix {
                 }
             }
             int position = 0; //Need to access LECR sequentially
-            for(int j = 0; j < temp.getHeight(); j++){//Modify all rows
-                if(j != i){//Except the row we are on
+            for(int j = 0; j < temp.getHeight(); j++) {//Modify all rows
+                if(j != i) {//Except the row we are on
                     //Take the value in LECR and do EROPS using the value as the modifier
-                    printDoubleTwoDArray(temp_arr);
                     if(leadsExcludingCurrentRow.get(position) == 0) continue;
                     elementaryOps(temp_arr,temp_arr_width,i,leadsExcludingCurrentRow.get(position),j);
                     position++;
@@ -214,7 +219,6 @@ public class Matrix {
                 If 5 is our target, this will grab 2 and 1
                 If 4 is our target this will grab 3 and 7
              */
-
             //TODO: Make elementary row operations and finish rest of rref algorithm
             //TODO: Finish sanity checking for the infinite solutions case, soltuion as defined with multiple variables, i.e., solution with t,s,etc.
             //TODO: Finish sanity check for matrix with no solution
@@ -232,7 +236,6 @@ public class Matrix {
     public void elementaryOps(Double[][] matrix, Integer temp_arr_width, Integer modifiedRow, Double modifier, Integer transformedRow){
         for(int i = 0; i < temp_arr_width; i++){
             Double executioner = (modifier * matrix[modifiedRow][i] * -1); //Take the modifiedRow value multiplied by the modifier
-            System.out.print(executioner + "\n");
             matrix[transformedRow][i] += executioner;//Combine with the value in the transformedRow
         }
     }
