@@ -10,10 +10,11 @@ public class Main {
         System.out.print("Add a matrix (2)\n");
         System.out.print("Print a matrix (3)\n");
         System.out.print("Get the scalar multiple of a matrix (4)\n");
-        System.out.print("Find the determinant of a matrix (5)\n");
-        System.out.print("Find the transpose of a matrix (6)\n");
-        System.out.print("Find the inverse of a matrix (7)\n");
-        System.out.print("Find the rref of a matrix (8)\n");
+        System.out.print("Find the product of two matrices (5)\n");
+        System.out.print("Find the determinant of a matrix (6)\n");
+        System.out.print("Find the transpose of a matrix (7)\n");
+        System.out.print("Find the inverse of a matrix (8)\n");
+        System.out.print("Find the rref of a matrix (9)\n");
         System.out.print("Enter your choice here: ");
     }
 
@@ -35,14 +36,14 @@ public class Main {
             String matrixName;
             Matrix temp;
             switch (userChoice) {
-                case 1:
+                case 1: //Print all the arrays
                     for(Matrix i : dataStore) {
                         System.out.print(i.getName() + "\n");
                         Matrix.printDoubleTwoDArray(i.getMatrixObject());
                         System.out.print("\n");
                     }
                     break;
-                case 2:
+                case 2: //Create a Matrix
                     System.out.print("Enter your matrix dimensions Row by Column\n (If Not Square, the rest will be filled with Zeroes)\n Enter RxC here: ");
                     Integer height = Integer.parseInt(scan.next());
                     Integer width = Integer.parseInt(scan.next());
@@ -90,7 +91,20 @@ public class Main {
                         Matrix.printDoubleTwoDArray(toPrint);
                     }
                     break;
-                case 5: //Find the determinant of the matrix if the matrix is in the datastore
+                case 5: //Prints the matrix multiple of two matrices
+                    System.out.print("Enter the matrix you'd like to multiply another matrix by: ");
+                    matrixName = scan.nextLine();
+                    temp = Matrix.searchDataStore(matrixName,dataStore);
+                    if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
+                    else {
+                        System.out.print("Enter the target matrix: ");
+                        matrixName = scan.nextLine();
+                        Matrix temp2 = Matrix.searchDataStore(matrixName,dataStore);
+                        Double[][] product = Matrix.productOfTwoMatrices(temp,temp2);
+                        Matrix.printDoubleTwoDArray(product);
+                    }
+                    break;
+                case 6: //Find the determinant of the matrix if the matrix is in the datastore
                     System.out.print("Enter which matrix you'd like to find the determinant of: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
@@ -98,21 +112,21 @@ public class Main {
                     //Determinant is calculated when matrix is formed
                     else System.out.println(temp.getDeterminant());
                     break;
-                case 6: //Find the transpose of the matrix if the matrix is in the datastore
+                case 7: //Find the transpose of the matrix if the matrix is in the datastore
                     System.out.print("Enter which matrix you'd like to transpose: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
                     if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
                     else Matrix.printDoubleTwoDArray(temp.getTranspose());
                     break;
-                case 7: //Find the inverse of the matrix if the matrix is in the datastore
+                case 8: //Find the inverse of the matrix if the matrix is in the datastore
                     System.out.print("Enter which matrix you'd like to get the inverse of: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);
                     if(temp.getName().equals("EMPTY_MATRIX_NO_PARAMETERS")) { System.out.print("Can't find that matrix, please make sure you typed the name correctly.\n"); }
                     else Matrix.printDoubleTwoDArray(temp.getInverse());
                     break;
-                case 8: //Rref of a matrix
+                case 9: //Rref of a matrix
                     System.out.print("Enter which matrix you'd like to put into reduced row echelon form: ");
                     matrixName = scan.nextLine();
                     temp = Matrix.searchDataStore(matrixName,dataStore);

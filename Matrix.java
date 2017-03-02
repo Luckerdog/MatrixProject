@@ -264,6 +264,21 @@ public class Matrix {
         return temp; //Return container
     }
 
+    public static Double[][] productOfTwoMatrices(Matrix right, Matrix left) { //Add in multiplication of matrices
+        Double[][] product = new Double[right.getHeight()][left.getHeight()]; //New dimension
+        for(int i = 0; i < right.getHeight(); i++) { //By row of the right Matrix
+            for(int j = 0; j < right.getWidth(); j++) { //By columns of that row
+                //Row elem of the right, Column elem of the left
+                Double result = 0.0;
+                for(int k = 0; k < left.getHeight(); k++) {
+                    result += right.getMatrixObject()[i][k] * left.getMatrixObject()[k][j];
+                }
+                product[i][j] = result;
+            }
+        }
+        return product;
+    }
+
     public static boolean searchForNameConflict(String name, ArrayList<Matrix> dataStore) { //Searches for name conflict of matrices
        for(Matrix i : dataStore) {
            if(i.getName().equals(name.toUpperCase())) {
