@@ -164,13 +164,13 @@ public class Matrix {
 
     public Double[][] getInverse() { //The inverse is defined as (1/det(Matrix)) * Transpose(Adjoint(Matrix))
         Matrix temp = new Matrix(this); //Copy the matrix we're targeting (So we don't modify the original)
-        Double inveresedDeterminant = Math.pow(this.getDeterminant(), -1.0); //Find the inversed determinant of the matrix
+        Double inverseDeterminant = Math.pow(this.getDeterminant(), -1.0); //Find the inversed determinant of the matrix
         Double[][] inverseThis = temp.getAdjoint(); //Get the adjoint of the copied matrix
         temp.setMatrixObject(inverseThis); //Set the temp matrix to the adjoint
         inverseThis = temp.getTranspose(); //Transpose the adjoint
         for(int i = 0; i < this.getHeight(); i++) { //For every row
             for(int j = 0; j < this.getWidth(); j++) { //For every column
-                inverseThis[i][j] = inveresedDeterminant * inverseThis[i][j]; //Multiply each element of the T(Adj(Matrix) by Det(Matrix)^-1
+                inverseThis[i][j] = inverseDeterminant * inverseThis[i][j]; //Multiply each element of the T(Adj(Matrix) by Det(Matrix)^-1
             }
         }
         return inverseThis; //Return the inverse
