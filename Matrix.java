@@ -241,7 +241,6 @@ public class Matrix {
     }
     public void elementaryOps(Double[][] matrix, Integer temp_arr_width, Integer modifiedRow, Double modifier, Integer transformedRow){
         for(int i = 0; i < temp_arr_width; i++){
-            printDoubleTwoDArray(matrix);
             Double executioner = (modifier * matrix[modifiedRow][i] * -1); //Take the modifiedRow value multiplied by the modifier
             matrix[transformedRow][i] += executioner;//Combine with the value in the transformedRow
         }
