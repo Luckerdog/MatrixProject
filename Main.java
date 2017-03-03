@@ -17,8 +17,11 @@ public class Main {
         System.out.print("Find the rref of a matrix (9)\n");
         System.out.print("Enter your choice here: ");
     }
-
     public static void main (String args[]) {
+        JavaFXVideoPlayerLaunchedFromSwing playtunes = new JavaFXVideoPlayerLaunchedFromSwing();
+        //Runtime.getRuntime().exec(playtunes);
+        playtunes.main(null);
+        JavaFXVideoPlayerLaunchedFromSwing playTunes = new JavaFXVideoPlayerLaunchedFromSwing();
         ArrayList<Matrix> dataStore = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         try {
