@@ -56,7 +56,7 @@ class SceneGenerator {
         final StackPane layout = new StackPane();
 
         // determine the source directory for the playlist
-        final File dir = new File("C:\\Users\\Public\\Music\\Sample Music");
+        final File dir = new File("");
         if (!dir.exists() || !dir.isDirectory()) {
             System.out.println("Cannot find video source directory: " + dir);
             Platform.exit();
@@ -170,7 +170,7 @@ class SceneGenerator {
 
     /** @return a MediaPlayer for the given source which will report any errors it encounters */
     private MediaPlayer createPlayer(String aMediaSrc) {
-        System.out.println("Creating player for: " + aMediaSrc);
+        //System.out.println("Creating player for: " + aMediaSrc);
         final MediaPlayer player = new MediaPlayer(new Media(aMediaSrc));
         player.setOnError(new Runnable() {
             @Override public void run() {

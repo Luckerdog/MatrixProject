@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 public class MatrixWriter {
-    public static String MatrixPathName = ""; //Define your text file path to store matrices
+    public static String MatrixPathName = "C:\\Users\\Taylor Lopez\\Documents\\GitHub\\MatrixProject\\matrixStore.txt"; //Define your text file path to store matrices
 
     public static void writeDataStoreToFile(ArrayList<Matrix> dataStore) throws IOException {
         FileWriter out = new FileWriter(MatrixPathName,true);
